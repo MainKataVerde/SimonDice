@@ -124,7 +124,7 @@ public class Main {
 	}
 	
 	/**
-	 * Metodo para ejecutar el juego 
+	 * Metodo para ejecutar
 	 */
 	
 	public static void play() {
