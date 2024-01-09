@@ -179,12 +179,8 @@ public class Main {
     			}
     		}else {
     			i = 13;
-<<<<<<< HEAD
     			System.out.println("Fallaste");//
-=======
-    			System.out.println("Fallaste");//intento
->>>>>>> branch 'main' of https://github.com/MainKataVerde/SimonDice.git
-    		}
+      		}
 		}
 		
 	}
