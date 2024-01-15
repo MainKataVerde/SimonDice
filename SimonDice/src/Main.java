@@ -175,6 +175,7 @@ public class Main {
     				}else {
     					v = secuenciaColores.length;
     					System.out.println("Fallaste");
+    					i = 13;
     				}
     			}
     		}else {
