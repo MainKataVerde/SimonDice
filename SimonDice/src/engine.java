@@ -4,7 +4,9 @@ public class engine {
 	
 	Scanner scanner = new Scanner(System.in);
 	
-	final private int MAX_COLORES_SEQ = 12;
+	final private int MAX_COLORES_SEQ = 4;
+	
+	private int z = 0 ;
 	
 	private tColores[] secuenciaColores = new tColores [MAX_COLORES_SEQ];
 
@@ -17,7 +19,7 @@ public class engine {
 	
 	public void start() {
 		menu();
-		
+				
 		int seleccion = scanner.nextInt();
 		
 		if(seleccion !=1 && seleccion !=0 && seleccion !=2) {
@@ -31,6 +33,19 @@ public class engine {
 					System.out.println("Gracias por jugar");
 				break;
 			case 1:
+				if(z<=0) {
+					Scanner sc3 = new Scanner(System.in);
+					System.out.println("Welcome To Simon dice !");
+			        System.out.print("What is your name? ");
+			        String nombre = sc3.nextLine();
+			        
+			        System.out.println();
+			        
+			        Persona jugador = new Persona(nombre,0);
+			        
+			        System.out.println("Hello "+jugador.getNombre(nombre)+", press ENTER to start playing");
+				}
+					z++;
 					play();
 				break;
 			}
@@ -40,37 +55,34 @@ public class engine {
 	 * Metodo que ejecuta todo el juego en si mismo
 	 */
 	public void play() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Welcome To Simon dice !");
-        System.out.print("What is your name? ");
-        String nombre = scanner.nextLine();
-        
-        System.out.println();
-        
-        Persona jugador = new Persona(nombre,0);
-        
-        System.out.println("Hello "+jugador.getNombre(nombre)+", press ENTER to start playing");
+		
+		Scanner sc = new Scanner(System.in);
+		Scanner sc2 = new Scanner(System.in);
+
 
         if (scanner.hasNextLine()) {
-            String s = scanner.nextLine();
+            String s = sc.nextLine();
         }        
     	generarSecuencia(4);
-        
         
     	int i = 0 ;
     	
     	boolean fallo = false;
+    	
+		
+		String regex = "^[a-zA-Z]$";
 
     	
 		do {
-			mostrarSecuencia(3 + i);
+			
+			mostrarSecuencia(3+i);
 
 			System.out.println();
 
 			System.out.println("Pulsa ENTER cuando hayas memorizado todo");
 
 			if (scanner.hasNextLine()) {
-				String s = scanner.nextLine();
+				String s = sc.nextLine();
 			}
 
 			/*for (int k = 0; k < 50; k++)
@@ -78,31 +90,40 @@ public class engine {
 
 			System.out.print("Introduce los colores : ");
 
-			char letra = scanner.next().charAt(0);
-
-			int v = 0;
+			char letra = sc2.next().charAt(0);
 
 			fallo = false;
-
-			if (comprobarColor(0, charColores(letra)) == false) {
-				v++;
-				while (v < 3 + i && fallo != true) {
-					System.out.print("Introduce el siguiente color : ");
-					letra = scanner.next().charAt(0);
-					if (comprobarColor(v, charColores(letra)) == false) {
-						v++;
-					} else {
-						fallo = true;
-						System.out.println("Fallaste");
-					}
-				}
-			} else {
-				System.out.println("Fallaste");
-			}
 			
-			i++;
-		}while (i < 12 && fallo != true);
+			int v = 0;
+			
+			if(String.valueOf(letra).matches("^[a-zA-Z]$")) {
+				if (comprobarColor(0, charColores(letra)) == false) {
+					v++;
+					while (v <( 3 + i )&& fallo != true) {
+						System.out.print("Introduce el siguiente color : ");
+						letra = sc2.next().charAt(0);
+						if (comprobarColor(v, charColores(letra)) == false) {
+							v++;
+						} else {
+							fallo = true;
+							System.out.println("Fallaste");
+						}
+					}
+				} else {
+					System.out.println("Fallaste");
+					fallo = true;
+				}
+				i++;
+			}else {
+				System.out.println("Error introduce un caracter");
+				start();
+			}
+		}while (i < this.MAX_COLORES_SEQ -1 && fallo != true);
+		
+		
+		
 	}
+	
 	
 	/**
 	 * Metodo que nos muestra las secuencias antes dichas generadas en el metodo generarsecuencia
@@ -111,8 +132,8 @@ public class engine {
 	 */
 	public void mostrarSecuencia (int _numero) {
 		System.out.print("Secuencia : ");
-		for (int i = 0; i < _numero; i++) {
-			System.out.print(this.secuenciaColores[i] + " ");
+		for (int i = 0; i < _numero ; i++) {
+			System.out.print(motrarColores(this.secuenciaColores[i])+ " ");
 		}
 	}
 	
