@@ -8,8 +8,10 @@ public class Persona {
 		 this.puntuacion = _puntuacion;
 	 }
 	 
-	 public void getNombre(String _nombre) {
+	 public String getNombre(String _nombre) {
 		 this.name = _nombre;
+		 
+		 return name ;
 	 }
 	 
 	 public void setNombre(String _nombre) {
