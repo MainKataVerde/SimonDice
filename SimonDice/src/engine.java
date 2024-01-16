@@ -1,10 +1,115 @@
+import java.util.Scanner;
+
 public class engine {
+	
+	Scanner scanner = new Scanner(System.in);
 	
 	final private int MAX_COLORES_SEQ = 12;
 	
 	private tColores[] secuenciaColores = new tColores [MAX_COLORES_SEQ];
 
 	public enum tColores { ROJO , VERDE , AZUL , DORADO }
+	
+	
+	/**
+	 * metodo que empieza la secuencia del juego
+	 */
+	
+	public void start() {
+		menu();
+		
+		int seleccion = scanner.nextInt();
+		
+		if(seleccion !=1 && seleccion !=0 && seleccion !=2) {
+			do {
+				System.out.println("Seleccione un numero del menu");
+				seleccion = scanner.nextInt();
+			}while(seleccion !=1 || seleccion !=0 || seleccion !=2);
+		}else {
+			switch (seleccion) {
+			case 0 :
+					System.out.println("Gracias por jugar");
+				break;
+			case 1:
+					play();
+				break;
+			}
+		}
+	}
+	/**
+	 * Metodo que ejecuta todo el juego en si mismo
+	 */
+	public void play() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Welcome To Simon dice !");
+        System.out.print("What is your name? ");
+        String nombre = scanner.nextLine();
+        
+        System.out.println();
+        
+        Persona jugador = new Persona(nombre,0);
+        
+        System.out.println("Hello "+jugador.getNombre(nombre)+", press ENTER to start playing");
+
+        if (scanner.hasNextLine()) {
+            String s = scanner.nextLine();
+        }        
+    	generarSecuencia(4);
+        
+        
+        for (int i = 0; i < 12; i++) {
+    		mostrarSecuencia(3+i);
+    		
+        	System.out.println();
+    		
+    		System.out.println("Pulsa ENTER cuando hayas memorizado todo");
+
+            if (scanner.hasNextLine()) {
+                String s = scanner.nextLine();
+            }
+            
+           for (int k = 0; k < 50; k++)
+            	System.out.println();
+            
+    		System.out.print("Introduce los colores : ");
+    		
+    		char letra = scanner.next().charAt(0);
+    								
+    		int v = 0 ;
+    		
+    		boolean fallo = false ;
+    		
+    		if (comprobarColor(0, charColores(letra))==false) {
+    			v++;
+    			while (v<3+i && fallo != true) {
+    				System.out.print("Introduce el siguiente color : ");
+    				letra = scanner.next().charAt(0);
+    				if (comprobarColor(v, charColores(letra))==false) {
+    					v++;
+    				}else {
+    					fallo = true;
+    					System.out.println("Fallaste");
+    					i= 13;
+    				}
+    			}
+    		}else {
+    			i = 13;
+    			System.out.println("Fallaste");
+      		}
+		}
+	}
+	
+	/**
+	 * Metodo que nos muestra las secuencias antes dichas generadas en el metodo generarsecuencia
+	 * @param _numero
+	 * @param secuenciaColores
+	 */
+	public void mostrarSecuencia (int _numero) {
+		System.out.print("Secuencia : ");
+		for (int i = 0; i < _numero; i++) {
+			System.out.print(this.secuenciaColores[i] + " ");
+		}
+	}
 	
 	
 	/**
@@ -111,6 +216,10 @@ public class engine {
 		}
 		
 		return compr;
+	}
+	
+	public void menu() {
+		System.out.println("0 - SALIR || 1 - JUGAR || 2 - COMMING SOON"); 
 	}
 	
 }

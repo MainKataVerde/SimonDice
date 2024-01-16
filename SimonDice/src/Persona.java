@@ -15,6 +15,6 @@ public class Persona {
 	 }
 	 
 	 public void setNombre(String _nombre) {
-		 System.out.print(_nombre);		 
+		 this.name = _nombre;	 
 	 }
 }
