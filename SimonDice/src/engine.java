@@ -57,46 +57,51 @@ public class engine {
     	generarSecuencia(4);
         
         
-        for (int i = 0; i < 12; i++) {
-    		mostrarSecuencia(3+i);
-    		
-        	System.out.println();
-    		
-    		System.out.println("Pulsa ENTER cuando hayas memorizado todo");
+    	int i = 0 ;
+    	
+    	boolean fallo = false;
 
-            if (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-            }
-            
-           for (int k = 0; k < 50; k++)
-            	System.out.println();
-            
-    		System.out.print("Introduce los colores : ");
-    		
-    		char letra = scanner.next().charAt(0);
-    								
-    		int v = 0 ;
-    		
-    		boolean fallo = false ;
-    		
-    		if (comprobarColor(0, charColores(letra))==false) {
-    			v++;
-    			while (v<3+i && fallo != true) {
-    				System.out.print("Introduce el siguiente color : ");
-    				letra = scanner.next().charAt(0);
-    				if (comprobarColor(v, charColores(letra))==false) {
-    					v++;
-    				}else {
-    					fallo = true;
-    					System.out.println("Fallaste");
-    					i= 13;
-    				}
-    			}
-    		}else {
-    			i = 13;
-    			System.out.println("Fallaste");
-      		}
-		}
+    	
+		do {
+			mostrarSecuencia(3 + i);
+
+			System.out.println();
+
+			System.out.println("Pulsa ENTER cuando hayas memorizado todo");
+
+			if (scanner.hasNextLine()) {
+				String s = scanner.nextLine();
+			}
+
+			/*for (int k = 0; k < 50; k++)
+				System.out.println();*/
+
+			System.out.print("Introduce los colores : ");
+
+			char letra = scanner.next().charAt(0);
+
+			int v = 0;
+
+			fallo = false;
+
+			if (comprobarColor(0, charColores(letra)) == false) {
+				v++;
+				while (v < 3 + i && fallo != true) {
+					System.out.print("Introduce el siguiente color : ");
+					letra = scanner.next().charAt(0);
+					if (comprobarColor(v, charColores(letra)) == false) {
+						v++;
+					} else {
+						fallo = true;
+						System.out.println("Fallaste");
+					}
+				}
+			} else {
+				System.out.println("Fallaste");
+			}
+			
+			i++;
+		}while (i < 12 && fallo != true);
 	}
 	
 	/**
