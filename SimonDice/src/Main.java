@@ -141,11 +141,6 @@ public class Main {
         
         
         for (int i = 0; i < 12; i++) {
-        	
-        	
-
-        	
-    		
     		mostrarSecuencia(3+i, secuenciaColores);
     		
         	System.out.println();
@@ -175,11 +170,11 @@ public class Main {
     				}else {
     					v = secuenciaColores.length;
     					System.out.println("Fallaste");
-    					i = 13;
+    					i= 13;
     				}
     			}
     		}else {
-    			i = 13;
+    			v = 13;
     			System.out.println("Fallaste");//
       		}
 		}
