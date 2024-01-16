@@ -1,4 +1,3 @@
-
 public class engine {
 	
 	final private int MAX_COLORES_SEQ = 12;
@@ -68,6 +67,11 @@ public class engine {
 			return posicionColores;
 	}
 	
+	/**
+	 * Metodo para pasar un tipo enum a string para hacer mas ameno el texto 
+	 * @param _color
+	 * @return
+	 */
 	public String motrarColores(tColores _color) {
 		
 		String stringcolor = null ;
@@ -86,12 +90,12 @@ public class engine {
 					stringcolor = "Dorado";
 				break;
 		}
-		
+
 		return stringcolor;
 	}
 	
 	public void generarSecuencia(int _numColores) {	
-		
+
         for (int i = 0; i < this.secuenciaColores.length; i++) {
         	int valorDado = (int)Math.floor(Math.random()*_numColores+1);            
             this.secuenciaColores[i] = intToColor(valorDado);

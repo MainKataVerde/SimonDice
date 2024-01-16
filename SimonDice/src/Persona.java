@@ -1,5 +1,5 @@
-
 public class Persona {
+	
 	 private int puntuacion = 0;
 	 private String name;
 	 
