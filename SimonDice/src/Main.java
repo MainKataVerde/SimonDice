@@ -6,8 +6,8 @@
 
 public class Main {
 	public static void main(String[] args) {
-			engine jugar = new engine();
+			engine engine = new engine();
 			
-			jugar.start();
+			engine.start();
 	}
 }
