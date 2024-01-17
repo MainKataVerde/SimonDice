@@ -44,7 +44,9 @@ public class engine {
 			        
 			        System.out.println();
 			        
-			        Persona jugador = new Persona(nombre,0);
+			        Persona jugador = new Persona("",0);
+			        
+			        jugador.setNombre(nombre);
 			        
 			        System.out.println("Hello "+jugador.getNombre(nombre)+", press ENTER to start playing");
 				}
