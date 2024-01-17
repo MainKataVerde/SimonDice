@@ -13,9 +13,7 @@ public class Persona {
 		 this.puntuacion = _puntuacion;
 	 }
 	 
-	 public String getNombre(String _nombre) {
-		 this.name = _nombre;
-		 
+	 public String getNombre(String _nombre) {		 
 		 return name ;
 	 }
 	 

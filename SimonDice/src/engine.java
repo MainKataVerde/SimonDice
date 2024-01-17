@@ -32,26 +32,26 @@ public class engine {
 			}while(seleccion !=1 || seleccion !=0 || seleccion !=2);
 		}else {
 			switch (seleccion) {
-			case 0 :
+				case 0:
 					System.out.println("Gracias por jugar");
-				break;
-			case 1:
-				if(z<=0) {
-					Scanner sc3 = new Scanner(System.in);
-					System.out.println("Welcome To Simon dice !");
-			        System.out.print("What is your name? ");
-			        String nombre = sc3.nextLine();
-			        
-			        System.out.println();
-			        
-			        Persona jugador = new Persona("",0);
-			        
-			        jugador.setNombre(nombre);
-			        
-			        System.out.println("Hello "+jugador.getNombre(nombre)+", press ENTER to start playing");
+					break;
+				case 1:
+					if (z <= 0) {
+						Scanner sc3 = new Scanner(System.in);
+						System.out.println("Welcome To Simon dice !");
+						System.out.print("What is your name? ");
+						String nombre = sc3.nextLine();
+
+						System.out.println();
+
+						Persona jugador = new Persona("", 0);
+
+						jugador.setNombre(nombre);
+
+						System.out.println("Hello " + jugador.getNombre(nombre) + ", press ENTER to start playing");
 				}
-					z++;
-					play();
+				z++;
+				play();
 				break;
 			}
 		}
@@ -102,10 +102,10 @@ public class engine {
 			
 			int v = 0;
 			
-			if(String.valueOf(letra).matches("^[a-zA-Z]$")) {
+			if (String.valueOf(letra).matches("^[a-zA-Z]$")) {
 				if (comprobarColor(0, charColores(letra)) == false) {
 					v++;
-					while (v <( 3 + i )&& fallo != true) {
+					while (v < (3 + i) && fallo != true) {
 						System.out.print("Introduce el siguiente color : ");
 						letra = sc2.next().charAt(0);
 						if (comprobarColor(v, charColores(letra)) == false) {
@@ -122,12 +122,12 @@ public class engine {
 					start();
 				}
 				i++;
-			}else {
+			} else {
 				System.out.println("Error introduce un caracter");
 				start();
 			}
-			
-			if (i >=this.MAX_COLORES_SEQ -2){
+
+			if (i >= this.MAX_COLORES_SEQ - 2) {
 				System.out.println();
 				System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
 				start();
