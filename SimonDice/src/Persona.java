@@ -1,3 +1,8 @@
+/**
+ * Proyecto de segunda evaluacion , Simon Dice 
+ * @author Oscar Nzabarinda Mukeshiamana
+ */
+
 public class Persona {
 	
 	 private int puntuacion = 0;

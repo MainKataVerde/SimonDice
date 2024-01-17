@@ -1,5 +1,8 @@
 import java.util.Scanner;
-
+/**
+ * Proyecto de segunda evaluacion , Simon Dice 
+ * @author Oscar Nzabarinda Mukeshiamana
+ */
 public class engine {
 	
 	Scanner scanner = new Scanner(System.in);
@@ -233,6 +236,11 @@ public class engine {
 		return stringcolor;
 	}
 	
+	/**
+	 * Metodo que genera una suencia aleatoria de nuemero y la introduce dentro de una array
+	 * @param _numColores
+	 */
+	
 	public void generarSecuencia(int _numColores) {	
 
         for (int i = 0; i < this.secuenciaColores.length; i++) {
@@ -241,6 +249,13 @@ public class engine {
 		}
 		
 	}
+	
+	/**
+	 * Metodo que comrueba si el color introducido es igual al que hemos introducido en la array
+	 * @param _index
+	 * @param _color
+	 * @return
+	 */
 	
 	public boolean comprobarColor(int _index , tColores _color) {
 		
@@ -251,6 +266,10 @@ public class engine {
 		
 		return compr;
 	}
+	
+	/**
+	 * Metodo que nos muestra un menu basico con 3 opciones 2 de ellas funcionales
+	 */
 	
 	public void menu() {
 		System.out.println("0 - SALIR || 1 - JUGAR || 2 - COMMING SOON"); 
