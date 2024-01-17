@@ -4,7 +4,7 @@ public class engine {
 	
 	Scanner scanner = new Scanner(System.in);
 	
-	final private int MAX_COLORES_SEQ = 4;
+	final private int MAX_COLORES_SEQ = 12;
 	
 	private int z = 0 ;
 	
@@ -85,8 +85,9 @@ public class engine {
 				String s = sc.nextLine();
 			}
 
-			/*for (int k = 0; k < 50; k++)
-				System.out.println();*/
+			for (int k = 0; k < 50; k++) {
+				System.out.println();
+			}
 
 			System.out.print("Introduce los colores : ");
 
@@ -107,19 +108,26 @@ public class engine {
 						} else {
 							fallo = true;
 							System.out.println("Fallaste");
+							start();
 						}
 					}
 				} else {
 					System.out.println("Fallaste");
 					fallo = true;
+					start();
 				}
 				i++;
 			}else {
 				System.out.println("Error introduce un caracter");
 				start();
 			}
-		}while (i < this.MAX_COLORES_SEQ -1 && fallo != true);
-		
+			
+			if (i >=this.MAX_COLORES_SEQ -2){
+				System.out.println();
+				System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
+				start();
+			}
+		}while (i < this.MAX_COLORES_SEQ -2 && fallo != true);
 		
 		
 	}
