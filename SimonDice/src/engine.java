@@ -27,8 +27,33 @@ public class engine {
 		
 		if(seleccion !=1 && seleccion !=0 && seleccion !=2) {
 			do {
-				System.out.println("Seleccione un numero del menu");
+				System.out.print("Seleccione un numero del menu : ");
 				seleccion = scanner.nextInt();
+				if(seleccion ==1 || seleccion ==0 || seleccion ==2) {
+					switch (seleccion) {
+					case 0:
+						System.out.println("Gracias por jugar");
+						break;
+					case 1:
+						if (z <= 0) {
+							Scanner sc3 = new Scanner(System.in);
+							System.out.println("Welcome To Simon dice !");
+							System.out.print("What is your name? ");
+							String nombre = sc3.nextLine();
+
+							System.out.println();
+
+							Persona jugador = new Persona("", 0);
+
+							jugador.setNombre(nombre);
+
+							System.out.println("Hello " + jugador.getNombre(nombre) + ", press ENTER to start playing");
+					}
+					z++;
+					play();
+					break;
+				}
+				}
 			}while(seleccion !=1 || seleccion !=0 || seleccion !=2);
 		}else {
 			switch (seleccion) {
