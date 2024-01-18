@@ -244,10 +244,8 @@ public class engine {
 	 */
 	
 	public void generarSecuencia(int _numColores) {	
-
         for (int i = 0; i < this.secuenciaColores.length; i++) {
-        	int valorDado = (int)Math.floor(Math.random()*_numColores+1);            
-            this.secuenciaColores[i] = intToColor(valorDado);
+            this.secuenciaColores[i] = intToColor((int)Math.floor(Math.random()*_numColores+1));
 		}
 		
 	}
