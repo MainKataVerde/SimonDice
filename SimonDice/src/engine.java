@@ -1,6 +1,6 @@
 import java.util.Scanner;
 /**
- * Proyecto de segunda evaluacion , Simon Dice 
+ * Clase que tiene toda la logica del juego aqui se va ejecutar todo la logica en si misma del poyecto 
  * @author Oscar Nzabarinda Mukeshiamana
  */
 public class engine {
@@ -47,7 +47,7 @@ public class engine {
 
 							jugador.setNombre(nombre);
 
-							System.out.println("Hello " + jugador.getNombre(nombre) + ", press ENTER to start playing");
+							System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
 					}
 					z++;
 					play();
@@ -73,7 +73,7 @@ public class engine {
 
 						jugador.setNombre(nombre);
 
-						System.out.println("Hello " + jugador.getNombre(nombre) + ", press ENTER to start playing");
+						System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
 				}
 				z++;
 				play();
@@ -165,8 +165,7 @@ public class engine {
 	
 	/**
 	 * Metodo que nos muestra las secuencias antes dichas generadas en el metodo generarsecuencia
-	 * @param _numero
-	 * @param secuenciaColores
+	 * @param _numero Parametro que nos mide el numero de colores que queremos que nos muestre en pantalla 
 	 */
 	public void mostrarSecuencia (int _numero) {
 		System.out.print("Secuencia : ");
@@ -178,8 +177,8 @@ public class engine {
 	
 	/**
 	 * Metodo en el que le proporcionamos un char(primer caracter del color) y nos devuelve el tipo color corespondiente
-	 * @param _color
-	 * @return
+	 * @param _color este va ha ser el char que introduzca el jugador para que nos lo pase a un color y posteriormente comprobarlo con las funcion comprobarcolor
+	 * @return color seleccionado por el usuario este mismo pero pasado a tipo tcolores 
 	 */
 	
 	public tColores charColores (char _color) {
