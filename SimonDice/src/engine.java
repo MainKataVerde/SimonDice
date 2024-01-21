@@ -210,8 +210,8 @@ public class engine {
 	
 	/**
 	 * Metodo en el que le proporcionamos un tipo int (numero) y nos devuelve un tipo color de la list enumerada
-	 * @param _numero
-	 * @return
+	 * @param _numero numero que introduciremos para que nos devulva un color 
+	 * @return nos devuelve su equivalente
 	 */
 	
 	public tColores intToColor(int _numero) {
@@ -238,8 +238,8 @@ public class engine {
 	
 	/**
 	 * Metodo para pasar un tipo enum a string para hacer mas ameno el texto 
-	 * @param _color
-	 * @return
+	 * @param _color aqui pondremos el color para que nos de su equivalente en string
+	 * @return nos devuelve la equivalencia de un color a una string en el que esta escrito mas amigable
 	 */
 	public String motrarColores(tColores _color) {
 		
@@ -265,7 +265,7 @@ public class engine {
 	
 	/**
 	 * Metodo que genera una suencia aleatoria de nuemero y la introduce dentro de una array
-	 * @param _numColores
+	 * @param _numColores el parametro nos indica el rango maximo de numeros que quiere que salga al generar los numeros 
 	 */
 	
 	public void generarSecuencia(int _numColores) {	
@@ -277,9 +277,9 @@ public class engine {
 	
 	/**
 	 * Metodo que comrueba si el color introducido es igual al que hemos introducido en la array
-	 * @param _index
-	 * @param _color
-	 * @return
+	 * @param _index el indice de la array 
+	 * @param _color el color par comprar 
+	 * @return debuelve falso si la comparacion es igual y cuando es diferente devuelve true ya que es correcto que has fallado
 	 */
 	
 	public boolean comprobarColor(int _index , tColores _color) {
