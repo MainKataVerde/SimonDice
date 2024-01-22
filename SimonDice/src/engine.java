@@ -19,7 +19,6 @@ public class engine {
 	/**
 	 * metodo que empieza la secuencia del juego
 	 */
-	
 	public void start() {
 		menu();
 				
@@ -151,18 +150,13 @@ public class engine {
 				System.out.println("Error introduce un caracter");
 				start();
 			}
-
 			if (i >= this.MAX_COLORES_SEQ - 2) {
 				System.out.println();
 				System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
 				start();
 			}
-		}while (i < this.MAX_COLORES_SEQ -2 && fallo != true);
-		
-		
+		}while (i < this.MAX_COLORES_SEQ -2 && fallo != true);	
 	}
-	
-	
 	/**
 	 * Metodo que nos muestra las secuencias antes dichas generadas en el metodo generarsecuencia
 	 * @param _numero Parametro que nos mide el numero de colores que queremos que nos muestre en pantalla 
@@ -173,20 +167,14 @@ public class engine {
 			System.out.print(motrarColores(this.secuenciaColores[i])+ " ");
 		}
 	}
-	
-	
 	/**
 	 * Metodo en el que le proporcionamos un char(primer caracter del color) y nos devuelve el tipo color corespondiente
 	 * @param _color este va ha ser el char que introduzca el jugador para que nos lo pase a un color y posteriormente comprobarlo con las funcion comprobarcolor
 	 * @return color seleccionado por el usuario este mismo pero pasado a tipo tcolores 
 	 */
-	
 	public tColores charColores (char _color) {
         tColores eleccionColores = null;
-
-        char letraColores = Character.toLowerCase(_color);
-        
-        	switch (letraColores) {
+        	switch (Character.toLowerCase(_color)) {
 			case 'r':
                 eleccionColores = tColores.ROJO;
 				break;
@@ -201,18 +189,14 @@ public class engine {
 				break;
 			default:
 				System.out.println("No conincide con ningun color");
-		
 			}
             return eleccionColores;
 		}
-	
-	
 	/**
 	 * Metodo en el que le proporcionamos un tipo int (numero) y nos devuelve un tipo color de la list enumerada
 	 * @param _numero numero que introduciremos para que nos devulva un color 
 	 * @return nos devuelve su equivalente
 	 */
-	
 	public tColores intToColor(int _numero) {
         tColores posicionColores = null;
 		switch (_numero) {
@@ -231,19 +215,15 @@ public class engine {
 		default:
 			System.out.println("Numero fuera del rango");
 		}
-		
 			return posicionColores;
 	}
-	
 	/**
 	 * Metodo para pasar un tipo enum a string para hacer mas ameno el texto 
 	 * @param _color aqui pondremos el color para que nos de su equivalente en string
 	 * @return nos devuelve la equivalencia de un color a una string en el que esta escrito mas amigable
 	 */
 	public String motrarColores(tColores _color) {
-		
 		String stringcolor = null ;
-		
 		switch(_color) {
 			case ROJO : 
 					stringcolor = "Rojo";
@@ -258,20 +238,16 @@ public class engine {
 					stringcolor = "Dorado";
 				break;
 		}
-
 		return stringcolor;
 	}
-	
 	/**
 	 * Metodo que genera una suencia aleatoria de nuemero y la introduce dentro de una array
 	 * @param _numColores el parametro nos indica el rango maximo de numeros que quiere que salga al generar los numeros 
 	 */
-	
 	public void generarSecuencia(int _numColores) {	
         for (int i = 0; i < this.secuenciaColores.length; i++) {
             this.secuenciaColores[i] = intToColor((int)Math.floor(Math.random()*_numColores+1));
 		}
-		
 	}
 	
 	/**
@@ -280,23 +256,17 @@ public class engine {
 	 * @param _color el color par comprar 
 	 * @return debuelve falso si la comparacion es igual y cuando es diferente devuelve true ya que es correcto que has fallado
 	 */
-	
 	public boolean comprobarColor(int _index , tColores _color) {
-		
 		Boolean compr = false ;
 		if (_color != this.secuenciaColores[_index]) {
 			compr = true;
 		}
-		
 		return compr;
 	}
-	
 	/**
 	 * Metodo que nos muestra un menu basico con 3 opciones 2 de ellas funcionales
 	 */
-	
 	public void menu() {
 		System.out.println("0 - SALIR || 1 - JUGAR || 2 - COMMING SOON"); 
 	}
-	
 }
