@@ -42,7 +42,7 @@ public class engine {
 
 							System.out.println();
 
-							Persona jugador = new Persona("", 0);
+							Persona jugador = new Persona("");
 
 							jugador.setNombre(nombre);
 
@@ -68,7 +68,7 @@ public class engine {
 
 						System.out.println();
 
-						Persona jugador = new Persona("", 0);
+						Persona jugador = new Persona("");
 
 						jugador.setNombre(nombre);
 

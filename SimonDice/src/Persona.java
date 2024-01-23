@@ -5,12 +5,12 @@
 
 public class Persona {
 	
-	 private int puntuacion = 0;
+	 private int puntuacion;
 	 private String name;
 	 
-	 public Persona(String _name ,int _puntuacion ) {
+	 public Persona(String _name) {
 		 this.name = _name;
-		 this.puntuacion = _puntuacion;
+		 this.puntuacion = 0;
 	 }
 	 
 	 /**
