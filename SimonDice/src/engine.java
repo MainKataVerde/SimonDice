@@ -165,7 +165,81 @@ public class engine {
 			
 			
 		}else if(_modo == tModo.DIFICIL){
+			if (scanner.hasNextLine()) {
+	            String s = sc.nextLine();
+	        }        
+	    	generarSecuencia(this.numColores.length);
+	        
+	    	int i = 0 ;
+	    	
+	    	boolean fallo = false;
+	    	
+	    	int ayudas = 3 ; 
+	    	
 			
+			String regex = "^[a-zA-Z]$";
+
+	    	
+			do {
+				
+				mostrarSecuencia(3+i);
+
+				System.out.println();
+
+				System.out.println("Pulsa ENTER cuando hayas memorizado todo");
+
+				if (scanner.hasNextLine()) {
+					String s = sc.nextLine();
+				}
+
+				for (int k = 0; k < 50; k++) {
+					System.out.println();
+				}
+
+				fallo = false;
+				
+				int v = 0;
+
+						while (v < (3 + i) && fallo != true) {
+							System.out.print("Introduce color "+(v+1)+" : ");
+							char letra = sc2.next().charAt(0);
+							if(String.valueOf(letra).matches("^[a-zA-Z]$")) {
+								if(letra == 'x') {
+									if (ayudas != 0 ) {
+										System.out.println("Tienes "+ ayudas + " ayudas ");
+										System.out.println("El siguiente color es "+ this.secuenciaColores[v]);
+										ayudas--;
+										System.out.print("Introduce color "+(v+1)+":");
+										letra = sc2.next().charAt(0);
+									}else {
+										System.out.println("No tienes ayudas suficientes");
+										System.out.print("Introduce color "+(v+1)+":");
+										letra = sc2.next().charAt(0);
+									}
+									
+								}else {
+									
+								}
+								if (comprobarColor(v, charColores(letra)) == false) {
+									v++;
+								} else {
+									fallo = true;
+									System.out.println("Fallaste");
+									start();
+								}
+							}else {
+								System.out.println("Error introduce un caracter");
+								start();
+							}
+							
+						}
+					i++;
+				if (i >= this.MAX_COLORES_SEQ - 2) {
+					System.out.println();
+					System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
+					start();
+				}
+			}while (i < this.MAX_COLORES_SEQ -2 && fallo != true);
 		}
 
 
