@@ -7,13 +7,19 @@ public class engine {
 	
 	Scanner scanner = new Scanner(System.in);
 	
-	final private int MAX_COLORES_SEQ = 12;
-	
+	final private int MAX_COLORES_SEQ = 15;
+		
 	private int z = 0 ;
 	
-	private tColores[] secuenciaColores = new tColores [MAX_COLORES_SEQ];
+	private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
 
-	public enum tColores { ROJO , VERDE , AZUL , DORADO }
+	public enum tColores { ROJO , VERDE , AZUL , DORADO , BLANCO , MARRON , NARANJA }
+	
+	public enum tModo{ FACIL , DIFICIL}
+	
+	private tColores[] numColores = tColores.values();
+	
+	
 	
 	
 	/**
@@ -24,11 +30,6 @@ public class engine {
 				
 		int seleccion = scanner.nextInt();
 		
-		if(seleccion !=1 && seleccion !=0 && seleccion !=2) {
-			do {
-				System.out.print("Seleccione un numero del menu : ");
-				seleccion = scanner.nextInt();
-				if(seleccion ==1 || seleccion ==0 || seleccion ==2) {
 					switch (seleccion) {
 					case 0:
 						System.out.println("Gracias por jugar");
@@ -42,120 +43,135 @@ public class engine {
 
 							System.out.println();
 
-							Persona jugador = new Persona("");
+							Persona jugador = new Persona(null);
 
 							jugador.setNombre(nombre);
 
 							System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
 					}
 					z++;
-					play();
+					play(tModo.FACIL);
 					break;
-				}
-				}
-			}while(seleccion !=1 || seleccion !=0 || seleccion !=2);
-		}else {
-			switch (seleccion) {
-				case 0:
-					System.out.println("Gracias por jugar");
+					
+					case 2:
+						if (z <= 0) {
+							Scanner sc3 = new Scanner(System.in);
+							System.out.println("Welcome To Simon dice !");
+							System.out.print("What is your name? ");
+							String nombre = sc3.nextLine();
+
+							System.out.println();
+
+							Persona jugador = new Persona(null);
+
+							jugador.setNombre(nombre);
+
+							System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
+					}
+					z++;
+					play(tModo.DIFICIL);
 					break;
-				case 1:
-					if (z <= 0) {
-						Scanner sc3 = new Scanner(System.in);
-						System.out.println("Welcome To Simon dice !");
-						System.out.print("What is your name? ");
-						String nombre = sc3.nextLine();
-
-						System.out.println();
-
-						Persona jugador = new Persona("");
-
-						jugador.setNombre(nombre);
-
-						System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
+					
 				}
-				z++;
-				play();
-				break;
-			}
-		}
 	}
 	/**
 	 * Metodo que ejecuta todo el juego en si mismo
 	 */
-	public void play() {
+	public int play(tModo _modo) {
 		
 		Scanner sc = new Scanner(System.in);
 		Scanner sc2 = new Scanner(System.in);
-
-
-        if (scanner.hasNextLine()) {
-            String s = sc.nextLine();
-        }        
-    	generarSecuencia(4);
-        
-    	int i = 0 ;
-    	
-    	boolean fallo = false;
-    	
 		
-		String regex = "^[a-zA-Z]$";
-
-    	
-		do {
-			
-			mostrarSecuencia(3+i);
-
-			System.out.println();
-
-			System.out.println("Pulsa ENTER cuando hayas memorizado todo");
-
+		
+		
+		
+		if(_modo == tModo.FACIL) {
+					
 			if (scanner.hasNextLine()) {
-				String s = sc.nextLine();
-			}
+	            String s = sc.nextLine();
+	        }        
+	    	generarSecuencia(this.numColores.length-3);
+	        
+	    	int i = 0 ;
+	    	
+	    	boolean fallo = false;
+	    	
+	    	int ayudas = 3 ; 
+	    	
+			
+			String regex = "^[a-zA-Z]$";
 
-			for (int k = 0; k < 50; k++) {
+	    	
+			do {
+				
+				mostrarSecuencia(3+i);
+
 				System.out.println();
-			}
 
-			System.out.print("Introduce los colores : ");
+				System.out.println("Pulsa ENTER cuando hayas memorizado todo");
 
-			char letra = sc2.next().charAt(0);
+				if (scanner.hasNextLine()) {
+					String s = sc.nextLine();
+				}
 
-			fallo = false;
-			
-			int v = 0;
-			
-			if (String.valueOf(letra).matches("^[a-zA-Z]$")) {
-				if (comprobarColor(0, charColores(letra)) == false) {
-					v++;
-					while (v < (3 + i) && fallo != true) {
-						System.out.print("Introduce el siguiente color : ");
-						letra = sc2.next().charAt(0);
-						if (comprobarColor(v, charColores(letra)) == false) {
-							v++;
-						} else {
-							fallo = true;
-							System.out.println("Fallaste");
-							start();
+				for (int k = 0; k < 50; k++) {
+					System.out.println();
+				}
+
+				fallo = false;
+				
+				int v = 0;
+
+						while (v < (3 + i) && fallo != true) {
+							System.out.print("Introduce color "+(v+1)+" : ");
+							char letra = sc2.next().charAt(0);
+							if(String.valueOf(letra).matches("^[a-zA-Z]$")) {
+								if(letra == 'x') {
+									if (ayudas != 0 ) {
+										System.out.println("Tienes "+ ayudas + " ayudas ");
+										System.out.println("El siguiente color es "+ this.secuenciaColores[v]);
+										ayudas--;
+										System.out.print("Introduce color "+(v+1)+":");
+										letra = sc2.next().charAt(0);
+									}else {
+										System.out.println("No tienes ayudas suficientes");
+										System.out.print("Introduce color "+(v+1)+":");
+										letra = sc2.next().charAt(0);
+									}
+									
+								}else {
+									
+								}
+								if (comprobarColor(v, charColores(letra)) == false) {
+									v++;
+								} else {
+									fallo = true;
+									System.out.println("Fallaste");
+									start();
+								}
+							}else {
+								System.out.println("Error introduce un caracter");
+								start();
+							}
+							
 						}
-					}
-				} else {
-					System.out.println("Fallaste");
-					fallo = true;
+					i++;
+				if (i >= this.MAX_COLORES_SEQ - 2) {
+					System.out.println();
+					System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
 					start();
 				}
-				i++;
-			} else {
-				System.out.println("Error introduce un caracter");
-				start();
-			}
-			if (i >= this.MAX_COLORES_SEQ - 2) {
-				System.out.println();
-				System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
-				start();
-			}
-		}while (i < this.MAX_COLORES_SEQ -2 && fallo != true);	
+			}while (i < this.MAX_COLORES_SEQ -2 && fallo != true);
+			
+			
+		}else if(_modo == tModo.DIFICIL){
+			
+		}
+
+
+        
+		
+		return (Integer) null ;
 	}
 	/**
 	 * Metodo que nos muestra las secuencias antes dichas generadas en el metodo generarsecuencia
@@ -187,8 +203,15 @@ public class engine {
 			case 'd':
                 eleccionColores = tColores.DORADO;
 				break;
-			default:
-				System.out.println("No conincide con ningun color");
+			case 'b':
+                eleccionColores = tColores.BLANCO;
+				break;
+			case 'm':
+                eleccionColores = tColores.MARRON;
+				break;
+			case 'n':
+                eleccionColores = tColores.NARANJA;
+				break;
 			}
             return eleccionColores;
 		}
@@ -212,8 +235,15 @@ public class engine {
 		case 4:
 			posicionColores = tColores.DORADO;
 			break;
-		default:
-			System.out.println("Numero fuera del rango");
+		case 5:
+			posicionColores = tColores.BLANCO;
+			break;
+		case 6:
+			posicionColores = tColores.MARRON;
+			break;
+		case 7:
+			posicionColores = tColores.NARANJA;
+			break;
 		}
 			return posicionColores;
 	}
@@ -236,6 +266,15 @@ public class engine {
 				break;
 			case DORADO :
 					stringcolor = "Dorado";
+				break;
+			case BLANCO :
+					stringcolor = "Blanco";
+				break;
+			case MARRON:
+					stringcolor = "Marron";
+				break;
+			case NARANJA :
+					stringcolor = "Naranja";
 				break;
 		}
 		return stringcolor;
@@ -267,6 +306,7 @@ public class engine {
 	 * Metodo que nos muestra un menu basico con 3 opciones 2 de ellas funcionales
 	 */
 	public void menu() {
-		System.out.println("0 - SALIR || 1 - JUGAR || 2 - COMMING SOON"); 
+		System.out.println("0 - SALIR || 1 - MODO FACIL || 2 - MODO DIFICIL"); 
 	}
 }
+
