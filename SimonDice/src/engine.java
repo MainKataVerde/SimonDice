@@ -146,6 +146,7 @@ public class engine {
 								}
 								if (comprobarColor(v, charColores(letra)) == false) {
 									v++;
+									
 								} else {
 									fallo = true;
 									System.out.println("Fallaste");
