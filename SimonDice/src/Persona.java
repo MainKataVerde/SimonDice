@@ -30,4 +30,22 @@ public class Persona {
 	 public void setNombre(String _nombre) {
 		 this.name = _nombre;	 
 	 }
+	 
+	 /**
+	  * Metodo que nos perdimete ponerle una puntuacion al jugador
+	  * @param _puntos
+	  */
+	 
+	 public void setPuntuacion(int _puntos) {
+		 this.puntuacion = _puntos;
+	 }
+	 
+	 
+	 /**
+	  * Metodo que nos permite saber la puntuacion del jugador;
+	  * @return
+	  */
+	 public int getPuntuacion() {
+		 return this.puntuacion;
+	 }
 }

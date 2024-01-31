@@ -98,6 +98,8 @@ public class engine {
 	    	
 	    	int ayudas = 3 ; 
 	    	
+	    	int puntos = 0 ; 
+	    	
 			
 			String regex = "^[a-zA-Z]$";
 
