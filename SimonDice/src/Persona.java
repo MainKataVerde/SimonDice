@@ -33,7 +33,7 @@ public class Persona {
 	 
 	 /**
 	  * Metodo que nos perdimete ponerle una puntuacion al jugador
-	  * @param _puntos
+	  * @param _puntos numero al que quieres igualar 
 	  */
 	 
 	 public void setPuntuacion(int _puntos) {
@@ -49,15 +49,23 @@ public class Persona {
 		 return this.puntuacion;
 	 }
 	 
-	 public int incrementPuntos(int _sumaPuntos) {
+	 /**
+	  * Metodo que incrementa los puntos
+	  * @param _sumaPuntos numero de puntos que quieres sumar
+	  */
+	 
+	 public void incrementPuntos(int _sumaPuntos) {
 		 this.puntuacion += _sumaPuntos;
 		 
-		 return this.puntuacion;
 	 }
 	 
-	 public int decrementoPuntos(int _restaPuntos) {
+	 /**
+	  * Metodo que resta el numero que pongas a la puntuacion 
+	  * @param _restaPuntos puntos a restar
+	  */
+	 
+	 public void decrementoPuntos(int _restaPuntos) {
 		 this.puntuacion -= _restaPuntos;
 		 
-		 return this.puntuacion;
 	 }
 }
