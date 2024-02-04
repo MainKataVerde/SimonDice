@@ -48,4 +48,16 @@ public class Persona {
 	 public int getPuntuacion() {
 		 return this.puntuacion;
 	 }
+	 
+	 public int incrementPuntos(int _sumaPuntos) {
+		 this.puntuacion += _sumaPuntos;
+		 
+		 return this.puntuacion;
+	 }
+	 
+	 public int decrementoPuntos(int _restaPuntos) {
+		 this.puntuacion -= _restaPuntos;
+		 
+		 return this.puntuacion;
+	 }
 }

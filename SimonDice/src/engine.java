@@ -19,6 +19,8 @@ public class engine {
 	
 	private tColores[] numColores = tColores.values();
 	
+	Persona jugador = new Persona(null);
+	
 	
 	
 	
@@ -42,8 +44,6 @@ public class engine {
 							String nombre = sc3.nextLine();
 
 							System.out.println();
-
-							Persona jugador = new Persona(null);
 
 							jugador.setNombre(nombre);
 
@@ -82,14 +82,12 @@ public class engine {
 		Scanner sc = new Scanner(System.in);
 		Scanner sc2 = new Scanner(System.in);
 		
-		
-		
+				
 		
 		if(_modo == tModo.FACIL) {
-					
-			if (scanner.hasNextLine()) {
-	            String s = sc.nextLine();
-	        }        
+					       
+			jugador.setPuntuacion(0);
+			
 	    	generarSecuencia(this.numColores.length-3);
 	        
 	    	int i = 0 ;
@@ -97,10 +95,7 @@ public class engine {
 	    	boolean fallo = false;
 	    	
 	    	int ayudas = 3 ; 
-	    	
-	    	int puntos = 0 ; 
-	    	
-			
+	    		    	
 			String regex = "^[a-zA-Z]$";
 
 	    	
@@ -130,6 +125,7 @@ public class engine {
 							if(String.valueOf(letra).matches("^[a-zA-Z]$")) {
 								if(letra == 'x') {
 									if (ayudas != 0 ) {
+										jugador.decrementoPuntos(8);
 										System.out.println("Tienes "+ ayudas + " ayudas ");
 										System.out.println("El siguiente color es "+ this.secuenciaColores[v]);
 										ayudas--;
@@ -146,31 +142,48 @@ public class engine {
 								}
 								if (comprobarColor(v, charColores(letra)) == false) {
 									v++;
-									
+									jugador.incrementPuntos(2);
 								} else {
+									if(jugador.getPuntuacion() < 0) {
+										jugador.setPuntuacion(0);
+									}
 									fallo = true;
 									System.out.println("Fallaste");
+									System.out.println("Sus puntos son : " + jugador.getPuntuacion());
+									
 									start();
 								}
 							}else {
+								if(jugador.getPuntuacion() < 0) {
+									jugador.setPuntuacion(0);
+								}
 								System.out.println("Error introduce un caracter");
+								System.out.println("Sus puntos son : " + jugador.getPuntuacion());
 								start();
 							}
 							
 						}
+						if(v >= ( 3 + i ) ) {
+							jugador.incrementPuntos(5);
+						}
 					i++;
 				if (i >= this.MAX_COLORES_SEQ - 2) {
+					jugador.incrementPuntos(40);
+					if(jugador.getPuntuacion() < 0) {
+						jugador.setPuntuacion(0);
+					}
 					System.out.println();
 					System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
+					System.out.println("Sus puntos son : " + jugador.getPuntuacion());
 					start();
 				}
 			}while (i < this.MAX_COLORES_SEQ -2 && fallo != true);
 			
 			
 		}else if(_modo == tModo.DIFICIL){
-			if (scanner.hasNextLine()) {
-	            String s = sc.nextLine();
-	        }        
+			
+			jugador.setPuntuacion(0);
+			
 	    	generarSecuencia(this.numColores.length);
 	        
 	    	int i = 0 ;
@@ -181,6 +194,7 @@ public class engine {
 	    	
 			
 			String regex = "^[a-zA-Z]$";
+			
 
 	    	
 			do {
@@ -203,52 +217,64 @@ public class engine {
 				
 				int v = 0;
 
-						while (v < (3 + i) && fallo != true) {
-							System.out.print("Introduce color "+(v+1)+" : ");
-							char letra = sc2.next().charAt(0);
-							if(String.valueOf(letra).matches("^[a-zA-Z]$")) {
-								if(letra == 'x') {
-									if (ayudas != 0 ) {
-										System.out.println("Tienes "+ ayudas + " ayudas ");
-										System.out.println("El siguiente color es "+ this.secuenciaColores[v]);
-										ayudas--;
-										System.out.print("Introduce color "+(v+1)+":");
-										letra = sc2.next().charAt(0);
-									}else {
-										System.out.println("No tienes ayudas suficientes");
-										System.out.print("Introduce color "+(v+1)+":");
-										letra = sc2.next().charAt(0);
-									}
-									
-								}else {
-									
-								}
-								if (comprobarColor(v, charColores(letra)) == false) {
-									v++;
-								} else {
-									fallo = true;
-									System.out.println("Fallaste");
-									start();
-								}
+				while (v < (3 + i) && fallo != true) {
+					System.out.print("Introduce color "+(v+1)+" : ");
+					char letra = sc2.next().charAt(0);
+					if(String.valueOf(letra).matches("^[a-zA-Z]$")) {
+						if(letra == 'x') {
+							if (ayudas != 0 ) {
+								jugador.decrementoPuntos(16);
+								System.out.println("Tienes "+ ayudas + " ayudas ");
+								System.out.println("El siguiente color es "+ this.secuenciaColores[v]);
+								ayudas--;
+								System.out.print("Introduce color "+(v+1)+":");
+								letra = sc2.next().charAt(0);
 							}else {
-								System.out.println("Error introduce un caracter");
-								start();
+								System.out.println("No tienes ayudas suficientes");
+								System.out.print("Introduce color "+(v+1)+":");
+								letra = sc2.next().charAt(0);
 							}
 							
+						}else {
+							
 						}
-					i++;
-				if (i >= this.MAX_COLORES_SEQ - 2) {
-					System.out.println();
-					System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
-					start();
+						if (comprobarColor(v, charColores(letra)) == false) {
+							v++;
+							jugador.incrementPuntos(4);
+						} else {
+							fallo = true;
+							System.out.println("Fallaste");
+							System.out.println("Sus puntos son : " + jugador.getPuntuacion());
+							start();
+						}
+					}else {
+						System.out.println("Error introduce un caracter");
+						System.out.println("Sus puntos son : " + jugador.getPuntuacion());
+						start();
+					}
+					
 				}
+				if(v >= ( 3 + i ) ) {
+					jugador.incrementPuntos(10);
+				}
+			i++;
+		if (i >= this.MAX_COLORES_SEQ - 2) {
+			jugador.incrementPuntos(80);
+			System.out.println();
+			System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
+			System.out.println("Sus puntos son : " + jugador.getPuntuacion());
+			start();
+		}
+		
+		if(jugador.getPuntuacion() < 0) {
+			jugador.setPuntuacion(0);
+		}
 			}while (i < this.MAX_COLORES_SEQ -2 && fallo != true);
 		}
 
 
         
-		
-		return (Integer) null ;
+		return jugador.getPuntuacion();
 	}
 	/**
 	 * Metodo que nos muestra las secuencias antes dichas generadas en el metodo generarsecuencia
