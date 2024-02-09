@@ -77,7 +77,11 @@ public class engine {
 					
 				}
 	}
-
+	/**
+	 * Metodo que nos permite perdir una ayuda , cuando lo ejecutamos nos enseña el siguiente colo de la secuencia en la que estamos para que todo sea mas facil
+	 * @param index Numero en le que se encuentra el color
+	 * @return	booleano que nos dice , si es false es que no hay ayudas pero si es true eso es que hay ayudas
+	 */
 	public boolean usarAyuda(int index){
 
 		if(ayudas >= 0){
