@@ -20,6 +20,9 @@ public class engine {
 	private tColores[] numColores = tColores.values();
 	
 	Persona jugador = new Persona(null);
+
+	int ayudas = 3 ; 
+
 	
 	
 	
@@ -74,6 +77,24 @@ public class engine {
 					
 				}
 	}
+
+	public boolean usarAyuda(int index){
+
+		if(ayudas >= 0){
+			System.out.println("Tienes "+ ayudas + " ayudas ");
+			System.out.println("El siguiente color es "+ this.secuenciaColores[index]);
+			System.out.print("Introduce color "+(index+1)+":");
+			ayudas--;
+			return true ;
+		}else{
+			System.out.println("No tienes ayudas suficientes");
+			System.out.print("Introduce color "+(index+1)+":");
+			return false;
+		}
+		
+	}
+	
+
 	/**
 	 * Metodo que ejecuta todo el juego en si mismo
 	 */
@@ -94,7 +115,6 @@ public class engine {
 	    	
 	    	boolean fallo = false;
 	    	
-	    	int ayudas = 3 ; 
 	    		    	
 			String regex = "^[a-zA-Z]$";
 
@@ -124,21 +144,9 @@ public class engine {
 							char letra = sc2.next().charAt(0);
 							if(String.valueOf(letra).matches("^[a-zA-Z]$")) {
 								if(letra == 'x') {
-									if (ayudas != 0 ) {
+										usarAyuda(v);
 										jugador.decrementoPuntos(8);
-										System.out.println("Tienes "+ ayudas + " ayudas ");
-										System.out.println("El siguiente color es "+ this.secuenciaColores[v]);
-										ayudas--;
-										System.out.print("Introduce color "+(v+1)+":");
 										letra = sc2.next().charAt(0);
-									}else {
-										System.out.println("No tienes ayudas suficientes");
-										System.out.print("Introduce color "+(v+1)+":");
-										letra = sc2.next().charAt(0);
-									}
-									
-								}else {
-									
 								}
 								if (comprobarColor(v, charColores(letra)) == false) {
 									v++;
