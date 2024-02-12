@@ -9,7 +9,7 @@ public class engine {
 	
 	final private int MAX_COLORES_SEQ = 15;
 		
-	private int z = 0 ;
+	private int contador = 0 ;
 	
 	private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
 
@@ -23,6 +23,9 @@ public class engine {
 
 	int ayudas = 3 ; 
 
+	final private int MAX_COLORES_FACIL = 4 ;
+
+	final private int MAX_COLORES_DIFICIL = 7 ;
 	
 	
 	
@@ -40,7 +43,7 @@ public class engine {
 						System.out.println("Gracias por jugar");
 						break;
 					case 1:
-						if (z <= 0) {
+						if (contador <= 0) {
 							Scanner sc3 = new Scanner(System.in);
 							System.out.println("Welcome To Simon dice !");
 							System.out.print("What is your name? ");
@@ -52,12 +55,12 @@ public class engine {
 
 							System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
 					}
-					z++;
+					contador++;
 					play(tModo.FACIL);
 					break;
 					
 					case 2:
-						if (z <= 0) {
+						if (contador <= 0) {
 							Scanner sc3 = new Scanner(System.in);
 							System.out.println("Welcome To Simon dice !");
 							System.out.print("What is your name? ");
@@ -71,9 +74,13 @@ public class engine {
 
 							System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
 					}
-					z++;
+					contador++;
 					play(tModo.DIFICIL);
 					break;
+
+					default : 
+							System.out.println("No existe ningun modo " + seleccion);
+						break;
 					
 				}
 	}
@@ -112,9 +119,9 @@ public class engine {
 			jugador.setPuntuacion(0);
 
 			if(_modo == tModo.FACIL){
-				generarSecuencia(this.numColores.length-3);
+				generarSecuencia(MAX_COLORES_FACIL);
 			}else{
-				generarSecuencia(this.numColores.length);
+				generarSecuencia(MAX_COLORES_DIFICIL);
 			}
 			
 	    	int i = 0 ;
@@ -170,7 +177,6 @@ public class engine {
 									System.out.println("Fallaste");
 									System.out.println("Sus puntos son : " + jugador.getPuntuacion());
 									
-									start();
 								}
 							}else {
 								if(jugador.getPuntuacion() < 0) {
@@ -178,7 +184,6 @@ public class engine {
 								}
 								System.out.println("Error introduce un caracter");
 								System.out.println("Sus puntos son : " + jugador.getPuntuacion());
-								start();
 							}
 							
 						}
@@ -205,9 +210,10 @@ public class engine {
 					System.out.println();
 					System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
 					System.out.println("Sus puntos son : " + jugador.getPuntuacion());
-					start();
 				}
 		}while (i < this.MAX_COLORES_SEQ -2 && fallo != true);
+
+		start();
 
 		return jugador.getPuntuacion();
 	}
