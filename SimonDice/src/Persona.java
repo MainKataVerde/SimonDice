@@ -48,24 +48,4 @@ public class Persona {
 	 public int getPuntuacion() {
 		 return this.puntuacion;
 	 }
-	 
-	 /**
-	  * Metodo que incrementa los puntos
-	  * @param _sumaPuntos numero de puntos que quieres sumar
-	  */
-	 
-	 public void incrementPuntos(int _sumaPuntos) {
-		 this.puntuacion += _sumaPuntos;
-		 
-	 }
-	 
-	 /**
-	  * Metodo que resta el numero que pongas a la puntuacion 
-	  * @param _restaPuntos puntos a restar
-	  */
-	 
-	 public void decrementoPuntos(int _restaPuntos) {
-		 this.puntuacion -= _restaPuntos;
-		 
-	 }
 }
