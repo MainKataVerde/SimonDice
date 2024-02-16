@@ -89,10 +89,11 @@ public class engine {
 	public boolean usarAyuda(int index) {
 
 		if (ayudas > 0) {
-			System.out.println("Tienes " + ayudas + " ayudas ");
+			System.out.println("Dispones de " + this.ayudas + " ayudas");
+			ayudas--;
+			System.out.println("Te quedan " + ayudas + " ayudas ");
 			System.out.println("El siguiente color es " + this.secuenciaColores[index]);
 			System.out.print("Introduce color " + (index + 1) + ":");
-			ayudas--;
 			return true;
 		} else {
 			System.out.println("No tienes ayudas suficientes");
