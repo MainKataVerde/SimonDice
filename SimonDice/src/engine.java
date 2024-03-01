@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -33,23 +34,25 @@ public class engine {
 
 	/**
 	 * metodo que empieza la secuencia del juego
+	 * @throws IOException 
 	 */
-	public void start() {
+	public void start() throws IOException {
 		menu();
 		int seleccion = scanner.nextInt();
+		Record record = new Record();
 		do {
+			Persona jugador = new Persona(null);
+			record.añadirJugador(jugador);
 			if (contador >= 1) {
 				menu();
 				seleccion = scanner.nextInt();
 			}
 			contador++;
-			if (seleccion != 0) {
+			if (contador <= 0 ) {
 				Scanner sc3 = new Scanner(System.in);
 				System.out.println("Welcome To Simon dice !");
 				System.out.print("What is your name? ");
 				String nombre = sc3.nextLine();
-
-				Persona jugador = new Persona(null);
 
 				System.out.println();
 
@@ -63,10 +66,21 @@ public class engine {
 					break;
 				case 1:
 					play(tModo.FACIL);
+					jugador.setPuntuacion(play(tModo.FACIL));
 					break;
 
 				case 2:
 					play(tModo.DIFICIL);
+					jugador.setPuntuacion(play(tModo.DIFICIL));
+					break;
+
+				case 3 :
+					record.escribirRanking();
+					record.cargarRanking();
+					break;
+
+				case 4 : 
+					record.showBestRanking();
 					break;
 
 				default:
@@ -364,6 +378,6 @@ public class engine {
 	 * Metodo que nos muestra un menu basico con 3 opciones 2 de ellas funcionales
 	 */
 	public void menu() {
-		System.out.println("0 - SALIR || 1 - MODO FACIL || 2 - MODO DIFICIL");
+		System.out.println("0 - SALIR || 1 - MODO FACIL || 2 - MODO DIFICIL || 3 - TOP 10 MEJORES JUGADORES || 4 - EL MEJOR JUGADOR");
 	}
 }
