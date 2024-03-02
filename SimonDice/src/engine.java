@@ -25,7 +25,6 @@ public class engine {
 		FACIL, DIFICIL
 	}
 
-
 	int ayudas = 3;
 
 	final private int MAX_COLORES_FACIL = 4;
@@ -34,52 +33,54 @@ public class engine {
 
 	/**
 	 * metodo que empieza la secuencia del juego
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void start() throws IOException {
 		menu();
 		int seleccion = scanner.nextInt();
 		Record record = new Record();
+		Persona jugador = new Persona("Oscar", 132);
+		Persona jugador1 = new Persona("Cris" , 132);
+		Persona jugador2 = new Persona("Erwan", 80);
+		record.añadirJugador(jugador);
+		record.añadirJugador(jugador2);
+		record.añadirJugador(jugador1);
 		do {
-			Persona jugador = new Persona(null);
-			record.añadirJugador(jugador);
-			if (contador >= 1) {
-				menu();
-				seleccion = scanner.nextInt();
-			}
-			contador++;
-			if (contador <= 0 ) {
+			if (contador <= 0 && seleccion != 3 && seleccion != 4) {
 				Scanner sc3 = new Scanner(System.in);
 				System.out.println("Welcome To Simon dice !");
 				System.out.print("What is your name? ");
 				String nombre = sc3.nextLine();
-
 				System.out.println();
 
 				jugador.setNombre(nombre);
 
 				System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
 			}
+			if (contador >= 1 ) {
+				menu();
+				seleccion = scanner.nextInt();
+			}
+
+			contador++;
 			switch (seleccion) {
 				case 0:
 					System.out.println("Gracias por jugar");
 					break;
 				case 1:
-					play(tModo.FACIL);
 					jugador.setPuntuacion(play(tModo.FACIL));
 					break;
 
 				case 2:
-					play(tModo.DIFICIL);
 					jugador.setPuntuacion(play(tModo.DIFICIL));
 					break;
 
-				case 3 :
-					record.escribirRanking();
-					record.cargarRanking();
+				case 3:
+					record.showRanking();
 					break;
 
-				case 4 : 
+				case 4:
 					record.showBestRanking();
 					break;
 
@@ -125,7 +126,7 @@ public class engine {
 		Scanner sc = new Scanner(System.in);
 		Scanner sc2 = new Scanner(System.in);
 
-		int puntos = 0 ; 
+		int puntos = 0;
 
 		if (_modo == tModo.FACIL) {
 			generarSecuencia(MAX_COLORES_FACIL);
@@ -164,30 +165,30 @@ public class engine {
 					if (letra == 'x') {
 						usarAyuda(vueltas);
 						if (_modo == tModo.FACIL)
-							puntos -= 8 ;
+							puntos -= 8;
 						else
-							puntos -= 16 ; 
+							puntos -= 16;
 						letra = sc2.next().charAt(0);
 					}
 					if (comprobarColor(vueltas, charColores(letra)) == false) {
 						vueltas++;
-						if (_modo == tModo.FACIL) 
+						if (_modo == tModo.FACIL)
 							puntos += 2;
-						 else 
-							puntos += 4;						
+						else
+							puntos += 4;
 					} else {
-						if (puntos < 0) 
+						if (puntos < 0)
 							puntos = 0;
-						
+
 						fallo = true;
 						System.out.println("Fallaste");
 						System.out.println("Sus puntos son : " + puntos);
 
 					}
 				} else {
-					if (puntos < 0) 
+					if (puntos < 0)
 						puntos = 0;
-					
+
 					System.out.println("Error introduce un caracter");
 					System.out.println("Sus puntos son : " + puntos);
 				}
@@ -195,23 +196,22 @@ public class engine {
 			}
 			if (vueltas >= (3 + i)) {
 
-				if (_modo == tModo.FACIL) 
-					puntos += 5 ;
-				 else 
-					puntos += 15 ;
-				
+				if (_modo == tModo.FACIL)
+					puntos += 5;
+				else
+					puntos += 15;
 
 			}
 			i++;
 			if (i >= this.MAX_COLORES_SEQ - 2) {
 				if (_modo == tModo.FACIL) {
-					puntos += 40 ;
+					puntos += 40;
 				} else {
-					puntos += 80 ;
+					puntos += 80;
 				}
 
 				if (puntos < 0) {
-					puntos = 0 ; 
+					puntos = 0;
 				}
 				System.out.println();
 				System.out.println("HAS GANADO ENHORABUENAAAAA!!!!!!!");
@@ -378,6 +378,7 @@ public class engine {
 	 * Metodo que nos muestra un menu basico con 3 opciones 2 de ellas funcionales
 	 */
 	public void menu() {
-		System.out.println("0 - SALIR || 1 - MODO FACIL || 2 - MODO DIFICIL || 3 - TOP 10 MEJORES JUGADORES || 4 - EL MEJOR JUGADOR");
+		System.out.println(
+				"0 - SALIR || 1 - MODO FACIL || 2 - MODO DIFICIL || 3 - TOP 10 MEJORES JUGADORES || 4 - EL MEJOR JUGADOR");
 	}
 }

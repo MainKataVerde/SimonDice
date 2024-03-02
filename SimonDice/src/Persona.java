@@ -8,9 +8,9 @@ public class Persona {
 	 private int puntuacion;
 	 private String name;
 	 
-	 public Persona(String _name) {
+	 public Persona(String _name , int _puntos) {
 		 this.name = _name;
-		 this.puntuacion = 0;
+		 this.puntuacion = _puntos;
 	 }
 	 
 	 /**
