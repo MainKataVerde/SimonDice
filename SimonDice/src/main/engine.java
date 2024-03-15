@@ -68,16 +68,16 @@ public class engine {
 			contador++;
 			switch (seleccion) {
 				case 0:
+					record.ordenarJugadores();
+					record.escribirJugador(fichero);
 					System.out.println("Gracias por jugar");
 					break;
 				case 1:
 					jugador.setPuntuacion(play(tModo.FACIL));
-					record.escribirJugador(fichero);
 					break;
 
 				case 2:
 					jugador.setPuntuacion(play(tModo.DIFICIL));
-					record.escribirJugador(fichero);
 					break;
 
 				case 3:

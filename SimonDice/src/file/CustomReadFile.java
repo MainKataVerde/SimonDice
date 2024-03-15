@@ -48,6 +48,7 @@ public class CustomReadFile extends FileReader implements ICustomReadFile {
                 jugadores.add(jugador);
                 this.sc.nextLine();
             } catch (NoSuchElementException e) {
+                System.err.println(e);
             }
         }
         return jugadores;
