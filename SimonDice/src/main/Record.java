@@ -29,7 +29,7 @@ public class Record {
             this.arryjugadores[contador] = jugador;
             this.contador++;   
         }else{
-            this.arryjugadores[this.contador -1 ] = jugador;
+            this.arryjugadores[this.contador -1] = jugador;
         }
     }
 
@@ -55,7 +55,7 @@ public class Record {
      * 0(n)
      * @throws IOException
      */
-    //cambiar esto
+
     public void showBestRanking() throws IOException {
         System.out.println("Mejor(es) jugador(es) : ");
         int i = 0;
@@ -64,7 +64,11 @@ public class Record {
             i++;
         }
     }
-
+    /**
+     * Metodo que nos carga los jugadores en la array desde el fichero 
+     * @param _fichero String con la direccion del fichero a leer
+     * @throws IOException
+     */
     public void cargarJugador(String _fichero) throws IOException{
         CustomReadFile read = new CustomReadFile(_fichero);
 
@@ -79,7 +83,13 @@ public class Record {
 
         read.closeReadFile();
     }
-
+    /**
+     * Metodo que nos escribe los jugadores en la array, en este mismo metodo tambien nos monta 
+     * el string de jugadores
+     * @param _fichero String donde esta la direccion del archivo
+     * @throws IOException
+     * @throws CloneNotSupportedException
+     */
     public void escribirJugador(String _fichero) throws IOException, CloneNotSupportedException{
         CustomWriteFile write = new CustomWriteFile(_fichero);
         String jugadores = "";
@@ -90,7 +100,7 @@ public class Record {
 
         write.escribirJugador(jugadores);
 
-        write.closeWhiteFile();
+        write.closeWriteFile();
 
     }
 
