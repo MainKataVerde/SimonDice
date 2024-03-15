@@ -1,7 +1,10 @@
-import java.io.FileReader;
-import java.io.FileWriter;
+package main;
+
+
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.ArrayList;
+import file.CustomReadFile;
+import file.CustomWriteFile;
 
 /**
  * @author Oscar Nzabarinda Mukeshimana
@@ -9,10 +12,11 @@ import java.util.Scanner;
 public class Record {
     final int MAX_JUGADORES = 20;
     private Persona arryjugadores[];
-    private int contador = 0;
+    private int contador;
 
     public Record() {
-        this.arryjugadores = new Persona[MAX_JUGADORES];
+        this.arryjugadores = new Persona[this.MAX_JUGADORES];
+        this.contador = 0 ;
     }
 
     /**
@@ -21,8 +25,12 @@ public class Record {
      * @param jugador Jugador que queremos añadir
      */
     public void añadirJugador(Persona jugador) {
-        this.arryjugadores[contador] = jugador;
-        this.contador++;
+        if (this.contador < this.MAX_JUGADORES) {
+            this.arryjugadores[contador] = jugador;
+            this.contador++;   
+        }else{
+            this.arryjugadores[this.contador -1 ] = jugador;
+        }
     }
 
     /**
@@ -32,15 +40,11 @@ public class Record {
      * @throws IOException
      */
     public void showRanking() throws IOException {
-        ordenarJugadores();
-        //escribirRanking();
         System.out.println("Jugadores : ");
 
         for (int i = 0; i < this.contador; i++) {
             System.out.println(this.arryjugadores[i].getPuntuacion() + " " + this.arryjugadores[i].getNombre());
         }
-
-        //cargarRanking();
     }
 
     /**
@@ -53,25 +57,41 @@ public class Record {
      */
     //cambiar esto
     public void showBestRanking() throws IOException {
-        ordenarJugadores();
         System.out.println("Mejor(es) jugador(es) : ");
         int i = 0;
         while (this.arryjugadores[i].getPuntuacion() == this.arryjugadores[0].getPuntuacion() && i <= this.contador) {
             System.out.println(this.arryjugadores[i].getPuntuacion() + " " + this.arryjugadores[i].getNombre());
             i++;
         }
+    }
 
-        /*escribirRanking();
-        FileReader file = new FileReader("./SimonDice/data/jugadores.txt");
-        Scanner sc = new Scanner(file);
-        int i = 0;
-        System.out.println("El(la)/los mejores  : ");
-        while (this.arryjugadores[i].getPuntuacion() == this.arryjugadores[0].getPuntuacion() && i <= this.contador) {
-            System.out.println(sc.nextLine());
+    public void cargarJugador(String _fichero) throws IOException{
+        CustomReadFile read = new CustomReadFile(_fichero);
+
+        ArrayList<Persona> jugadores = read.leerJugador();
+
+        int i = 0 ; 
+
+        while (i < jugadores.size() && i < this.MAX_JUGADORES) {
+            añadirJugador(jugadores.get(i));
             i++;
         }
-        file.close();
-        sc.close();*/
+
+        read.closeReadFile();
+    }
+
+    public void escribirJugador(String _fichero) throws IOException, CloneNotSupportedException{
+        CustomWriteFile write = new CustomWriteFile(_fichero);
+        String jugadores = "";
+
+        for (int i = 0; i < this.contador; i++) {
+            jugadores += arryjugadores[i].getPuntuacion() + " " + arryjugadores[i].getNombre() + "\n";
+        }
+
+        write.escribirJugador(jugadores);
+
+        write.closeWhiteFile();
+
     }
 
     /**
@@ -91,23 +111,6 @@ public class Record {
             }
         }
     }
-
-/* 
-    public void escribirRanking() throws IOException {
-        ordenarJugadores();
-        try {
-            FileWriter file = new FileWriter("./SimonDice/data/jugadores.txt");
-            for (int i = 0; i < this.contador; i++) {
-                String jugadores = this.arryjugadores[i].getPuntuacion() + " " + this.arryjugadores[i].getNombre()
-                        + "\n";
-                file.write(jugadores);
-            }
-            file.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-*/
     /**
      * Metodo en el que buscamos un jugador en la array de jugadores y lo devolvemos
      * 0(n)
@@ -127,24 +130,4 @@ public class Record {
         }
         return jugador;
     }
-/* 
-
-    public void cargarRanking() throws IOException {
-        ordenarJugadores();
-        try {
-            FileReader file = new FileReader("./SimonDice/data/jugadores.txt");
-            Scanner sc = new Scanner(file);
-
-            while (sc.hasNextLine()) {
-                System.out.println(sc.nextLine());
-            }
-
-            file.close();
-            sc.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
-*/
 }

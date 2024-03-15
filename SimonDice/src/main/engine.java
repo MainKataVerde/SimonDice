@@ -1,3 +1,5 @@
+package main;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -34,35 +36,31 @@ public class engine {
 	/**
 	 * metodo que empieza la secuencia del juego
 	 * 0(1)
+	 * 
 	 * @throws IOException
+	 * @throws CloneNotSupportedException
 	 */
-	public void start() throws IOException {
+	public void start() throws IOException, CloneNotSupportedException {
+		Record record = new Record();
+		String fichero = "./src/data/jugadores.txt";
+		record.cargarJugador(fichero);
 		menu();
 		int seleccion = scanner.nextInt();
-		Record record = new Record();
-		Persona jugador = new Persona("Oscar", 132);
-		Persona jugador1 = new Persona("Cris" , 132);
-		Persona jugador2 = new Persona("Erwan", 80);
-		//Persona jugador3 = new Persona("Alvaro", 50);
-		//Persona jugador4 = new Persona("Roberto", 35);
+		Persona jugador = new Persona(null, 0);
 		record.añadirJugador(jugador);
-		record.añadirJugador(jugador2);
-		record.añadirJugador(jugador1);
-		//record.añadirJugador(jugador4);
-		//record.añadirJugador(jugador3);
+
+		Scanner sc3 = new Scanner(System.in);
+		System.out.println("Welcome To Simon dice !");
+		System.out.print("What is your name? ");
+		String nombre = sc3.nextLine();
+		System.out.println();
+
+		jugador.setNombre(nombre);
+
+		System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
+
 		do {
-			if (contador <= 0 && seleccion != 3 && seleccion != 4) {
-				Scanner sc3 = new Scanner(System.in);
-				System.out.println("Welcome To Simon dice !");
-				System.out.print("What is your name? ");
-				String nombre = sc3.nextLine();
-				System.out.println();
-
-				jugador.setNombre(nombre);
-
-				System.out.println("Hello " + jugador.getNombre() + ", press ENTER to start playing");
-			}
-			if (contador >= 1 ) {
+			if (contador >= 1) {
 				menu();
 				seleccion = scanner.nextInt();
 			}
@@ -74,17 +72,21 @@ public class engine {
 					break;
 				case 1:
 					jugador.setPuntuacion(play(tModo.FACIL));
+					record.escribirJugador(fichero);
 					break;
 
 				case 2:
 					jugador.setPuntuacion(play(tModo.DIFICIL));
+					record.escribirJugador(fichero);
 					break;
 
 				case 3:
+					record.ordenarJugadores();
 					record.showRanking();
 					break;
 
 				case 4:
+					record.ordenarJugadores();
 					record.showBestRanking();
 					break;
 
@@ -101,17 +103,17 @@ public class engine {
 	 * Metodo que nos permite perdir una ayuda , cuando lo ejecutamos nos enseña el
 	 * siguiente colo de la secuencia en la que estamos para que todo sea mas facil
 	 * 0(1)
+	 * 
 	 * @param index Numero en le que se encuentra el color
 	 * @return booleano que nos dice , si es false es que no hay ayudas pero si es
 	 *         true eso es que hay ayudas
 	 */
 	public boolean usarAyuda(int index) {
-
 		if (ayudas > 0) {
 			System.out.println("Dispones de " + this.ayudas + " ayudas");
 			ayudas--;
 			System.out.println("Te quedan " + ayudas + " ayudas ");
-			System.out.println("El siguiente color es " + this.secuenciaColores[index]);
+			System.out.println("El siguiente color es " + motrarColores(this.secuenciaColores[index]));
 			System.out.print("Introduce color " + (index + 1) + ":");
 			return true;
 		} else {
@@ -119,7 +121,6 @@ public class engine {
 			System.out.print("Introduce color " + (index + 1) + ":");
 			return false;
 		}
-
 	}
 
 	/**
@@ -230,6 +231,7 @@ public class engine {
 	 * Metodo que nos muestra las secuencias antes dichas generadas en el metodo
 	 * generarsecuencia
 	 * 0(n)
+	 * 
 	 * @param _numero Parametro que nos mide el numero de colores que queremos que
 	 *                nos muestre en pantalla
 	 */
@@ -244,6 +246,7 @@ public class engine {
 	 * Metodo en el que le proporcionamos un char(primer caracter del color) y nos
 	 * devuelve el tipo color corespondiente
 	 * 0(1)
+	 * 
 	 * @param _color este va ha ser el char que introduzca el jugador para que nos
 	 *               lo pase a un color y posteriormente comprobarlo con las funcion
 	 *               comprobarcolor
@@ -282,6 +285,7 @@ public class engine {
 	 * Metodo en el que le proporcionamos un tipo int (numero) y nos devuelve un
 	 * tipo color de la list enumerada
 	 * 0(1)
+	 * 
 	 * @param _numero numero que introduciremos para que nos devulva un color
 	 * @return nos devuelve su equivalente
 	 */
@@ -316,6 +320,7 @@ public class engine {
 	/**
 	 * Metodo para pasar un tipo enum a string para hacer mas ameno el texto
 	 * 0(1)
+	 * 
 	 * @param _color aqui pondremos el color para que nos de su equivalente en
 	 *               string
 	 * @return nos devuelve la equivalencia de un color a una string en el que esta
@@ -353,6 +358,7 @@ public class engine {
 	 * Metodo que genera una suencia aleatoria de nuemero y la introduce dentro de
 	 * una array
 	 * 0(n)
+	 * 
 	 * @param _numColores el parametro nos indica el rango maximo de numeros que
 	 *                    quiere que salga al generar los numeros
 	 */
@@ -366,6 +372,7 @@ public class engine {
 	 * Metodo que comrueba si el color introducido es igual al que hemos introducido
 	 * en la array
 	 * 0(1)
+	 * 
 	 * @param _index el indice de la array
 	 * @param _color el color par comprar
 	 * @return debuelve falso si la comparacion es igual y cuando es diferente

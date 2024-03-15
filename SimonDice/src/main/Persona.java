@@ -1,3 +1,5 @@
+package main;
+
 /**
  * Clase que representa a todos los jugadores que van a jugar al juego con todas sus caracteristicas
  * @author Oscar Nzabarinda Mukeshiamana

@@ -2,14 +2,22 @@
 {
     "base_path": "c:\\Users\\PORTATIL DE MAKINON\\Documents\\SIMONCIN\\SimonDice\\SimonDice",
     "out": "c:\\Users\\PORTATIL DE MAKINON\\Documents\\SIMONCIN\\SimonDice\\SimonDice\\javadoc",
-    "javadoc_executable": "C:\\Program Files\\Java\\jre-1.8\\bin\\",
+    "javadoc_executable": "C:\\Program Files\\Java\\jre-1.8\\bin\\javadoc.exe",
     "exclude": [],
     "raw_params": ""
 }
 
-==== ERRORS ====
-	Could not find a valid javadoc executable located in: 
-	C:\Program Files\Java\jre-1.8\bin\
-	The javadoc executable path should end in with the executable file name and extension.
+==== COMMAND ====
+"C:\Program Files\Java\jre-1.8\bin\javadoc.exe" 
+	-sourcepath "c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice" 
+	-d "c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice\javadoc" 
+	"c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice\src\file\CustomReadFile.java"
+	"c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice\src\file\CustomWriteFile.java"
+	"c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice\src\file\ICustomReadFile.java"
+	"c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice\src\file\ICustomWriteFile.java"
+	"c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice\src\main\engine.java"
+	"c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice\src\main\Main.java"
+	"c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice\src\main\Persona.java"
+	"c:\Users\PORTATIL DE MAKINON\Documents\SIMONCIN\SimonDice\SimonDice\src\main\Record.java"
 
 
